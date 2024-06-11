@@ -20,6 +20,7 @@ def obj_id():
 
 
 def test_create_object():
+    new_object_endpoint = CreateObject()
     payload = {
         "name": "Apple MacBook Pro 16",
         "data": {
@@ -29,8 +30,9 @@ def test_create_object():
             "Hard disk size": "1 TB"
         }
     }
-    response = requests.post("https://api.restful-api.dev/objects", json=payload).json()
-    assert response['name'] == payload['name']
+    new_object_endpoint.new_object(payload=payload)
+    new_object_endpoint.check_response_is_200()
+    new_object_endpoint.check_name(payload['name'])
 
 
 def test_get_object(obj_id):
