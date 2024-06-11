@@ -13,3 +13,6 @@ class GetObject:
 
     def check_response_id(self, object_id):
         assert self.response_json['id'] == object_id
+
+    def check_response_is_404(self):
+        assert self.response.status_code == 404
