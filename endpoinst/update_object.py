@@ -15,4 +15,4 @@ class UpdateObject:
 
     def check_response_payload(self, name, data):
         assert self.response_json['name'] == name
-        assert self.response_json['name'] == data
+        assert self.response_json['data'] == data
