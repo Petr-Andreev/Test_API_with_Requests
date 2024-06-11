@@ -3,7 +3,8 @@ import pytest
 
 from endpoinst.create_object import CreateObject
 from endpoinst.get_object import GetObject
-
+from endpoinst.update_object import UpdateObject
+from endpoinst.delete_object import DeleteObject
 
 
 @pytest.fixture()
@@ -45,6 +46,7 @@ def test_get_object(obj_id):
     get_obj_endpoint.check_response_is_200()
 
 def test_update_object(obj_id):
+    update_object_endpoint = UpdateObject()
     payload = {
         "name": "Apple MacBook Pro 21",
         "data": {
@@ -54,12 +56,9 @@ def test_update_object(obj_id):
             "Hard disk size": "1 TB"
         }
     }
-    response = requests.put(
-        f"https://api.restful-api.dev/objects/{obj_id}",
-        json=payload
-    ).json()
-    assert response['name'] == payload['name']
-    assert response['data'] == payload['data']
+    update_object_endpoint.update_by_id(obj_id, payload)
+    update_object_endpoint.check_response_payload(payload['name'], payload['data'])
+    update_object_endpoint.check_response_is_200()
 
 
 def test_delete_object(obj_id):
