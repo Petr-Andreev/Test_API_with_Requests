@@ -2,6 +2,9 @@ import requests
 import pytest
 
 from endpoinst.create_object import CreateObject
+from endpoinst.get_object import GetObject
+
+
 
 @pytest.fixture()
 def obj_id():
@@ -36,9 +39,10 @@ def test_create_object():
 
 
 def test_get_object(obj_id):
-    response = requests.get(f"https://api.restful-api.dev/objects/{obj_id}").json()
-    assert response['id'] == obj_id
-
+    get_obj_endpoint = GetObject()
+    get_obj_endpoint.get_by_id(obj_id)
+    get_obj_endpoint.check_response_id(obj_id)
+    get_obj_endpoint.check_response_is_200()
 
 def test_update_object(obj_id):
     payload = {
