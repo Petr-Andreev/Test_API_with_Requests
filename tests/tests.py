@@ -1,6 +1,7 @@
 import requests
 import pytest
 
+from endpoinst.create_object import CreateObject
 
 @pytest.fixture()
 def obj_id():
